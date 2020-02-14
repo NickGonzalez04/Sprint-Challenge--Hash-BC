@@ -62,7 +62,7 @@ if __name__ == '__main__':
 
     # Load or create ID
     # f = open("my_id.txt", "r")
-    id = 'Jeff-Bezos'
+    id = 'NickG'
     print("ID is", id)
     # f.close()
 
