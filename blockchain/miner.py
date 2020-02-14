@@ -86,3 +86,5 @@ if __name__ == '__main__':
             print("Total coins mined: " + str(coins_mined))
         else:
             print(data.get('message'))
+
+        #14 Coins minded in main server
