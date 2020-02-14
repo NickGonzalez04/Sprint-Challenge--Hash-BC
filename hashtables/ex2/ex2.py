@@ -21,14 +21,12 @@ def reconstruct_trip(tickets, length):
     """
 
     for index in range(length):
-        if tickets[index].source == 'NONE':
-            route[0] = tickets[index].destination 
         hash_table_insert(ht, tickets[index].source, tickets[index].destination)
         # print(ht,tickets[index].source, tickets[index].destination)
+        route[0] = hash_table_retrieve(ht, 'NONE')
 
-    for i in range(length):
-        if route[i-1] is not None:
-            # get next array value by sending the key (source) and getting back the value (destination)
-            route[i] = hash_table_retrieve(ht, route[i-1])
+    for j in range(1, length-1):
+            route[j] = hash_table_retrieve(ht, route[j-1])
 
+    route.pop()
     return route
