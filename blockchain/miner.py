@@ -22,11 +22,14 @@ def proof_of_work(last_proof):
 
     start = timer()
 
-    print("Searching for next proof")
-    proof = 0
+    proof = random.randint(-3257483649, 3257483649)
     #  TODO: Your code here
+    last_hash = hashlib.sha256(str(last_proof).encode()).hexdigest()
 
-    print("Proof found: " + str(proof) + " in " + str(timer() - start))
+    while valid_proof(last_hash, proof) is False:
+        proof += 1
+
+    # print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
 
 
@@ -40,7 +43,11 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    pass
+    guess_hash = hashlib.sha256(str(proof).encode()).hexdigest()
+
+    if guess_hash[:6] == last_hash[-6:]:
+        return True
+    return False
 
 
 if __name__ == '__main__':
@@ -49,14 +56,15 @@ if __name__ == '__main__':
         node = sys.argv[1]
     else:
         node = "https://lambda-coin.herokuapp.com/api"
+        # node = "https://lambda-coin-test-1.herokuapp.com/api"
 
     coins_mined = 0
 
     # Load or create ID
-    f = open("my_id.txt", "r")
-    id = f.read()
+    # f = open("my_id.txt", "r")
+    id = 'NickG'
     print("ID is", id)
-    f.close()
+    # f.close()
 
     if id == 'NONAME\n':
         print("ERROR: You must change your name in `my_id.txt`!")
@@ -78,3 +86,5 @@ if __name__ == '__main__':
             print("Total coins mined: " + str(coins_mined))
         else:
             print(data.get('message'))
+
+        #14 Coins minded in main server
